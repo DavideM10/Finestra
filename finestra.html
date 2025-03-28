@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scherzo del PIN</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+        }
+        .container {
+            text-align: center;
+            padding: 20px;
+            background-color: #fff;
+            border: 2px solid #ccc;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        input[type="password"] {
+            padding: 10px;
+            font-size: 16px;
+            margin-top: 10px;
+        }
+        button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Impossibile uscire senza il PIN</h2>
+        <p>Inserisci il PIN per chiudere questa pagina:</p>
+        <input type="password" id="pin" placeholder="Inserisci PIN" />
+        <button onclick="checkPin()">Conferma</button>
+    </div>
+
+    <script>
+        // Funzione per controllare il PIN
+        function checkPin() {
+            var pin = document.getElementById('pin').value;
+            var correctPin = '1209';  // Cambia questo PIN con quello che vuoi
+
+            if (pin === correctPin) {
+                alert('PIN corretto! Puoi uscire ora.');
+                window.close();  // Chiude la finestra del browser (funziona solo su finestre aperte da JavaScript)
+            } else {
+                alert('PIN errato. Riprova.');
+            }
+        }
+
+        // Impedisce di uscire dalla pagina senza il PIN
+        window.onbeforeunload = function() {
+            return "Sei sicuro di voler lasciare questa pagina?";
+        };
+    </script>
+</body>
+</html>
