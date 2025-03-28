@@ -3,64 +3,90 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Scherzo del PIN</title>
+    <title>PC HACKED</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            background-color: #000;
+            color: red;
+            font-family: "Courier New", Courier, monospace;
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh;
-            margin: 0;
-            background-color: #f0f0f0;
+            flex-direction: column;
         }
-        .container {
+        .message {
+            font-size: 4rem;
             text-align: center;
-            padding: 20px;
-            background-color: #fff;
-            border: 2px solid #ccc;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            color: red;
+            text-transform: uppercase;
+            letter-spacing: 5px;
+            margin: 0;
         }
-        input[type="password"] {
-            padding: 10px;
-            font-size: 16px;
-            margin-top: 10px;
-        }
-        button {
+        .sub-message {
+            font-size: 1.8rem;
+            color: red;
             margin-top: 20px;
-            padding: 10px 20px;
-            font-size: 16px;
-            cursor: pointer;
+        }
+        .progress-container {
+            width: 80%;
+            height: 30px;
+            background-color: #222;
+            border-radius: 10px;
+            margin-top: 50px;
+            box-shadow: 0 0 10px rgba(255, 0, 0, 0.8);
+        }
+        .progress-bar {
+            height: 100%;
+            background-color: red;
+            border-radius: 10px;
+            width: 0%;
+            text-align: center;
+            line-height: 30px;
+            color: white;
+            font-size: 1.2rem;
+        }
+        .info-message {
+            font-size: 1.5rem;
+            color: red;
+            margin-top: 10px;
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h2>Impossibile uscire senza il PIN</h2>
-        <p>Inserisci il PIN per chiudere questa pagina:</p>
-        <input type="password" id="pin" placeholder="Inserisci PIN" />
-        <button onclick="checkPin()">Conferma</button>
+    <div class="message">PC HACKED</div>
+    <div class="sub-message">Immetti la chiave di sblocco per prendere il controllo della macchina.</div>
+    
+    <div class="progress-container">
+        <div class="progress-bar" id="progress-bar">0%</div>
     </div>
+    <div class="info-message" id="info-message">Acquisizione dei file nel computer...</div>
 
     <script>
-        // Funzione per controllare il PIN
-        function checkPin() {
-            var pin = document.getElementById('pin').value;
-            var correctPin = '1209';  // Cambia questo PIN con quello che vuoi
-
-            if (pin === correctPin) {
-                alert('PIN corretto! Puoi uscire ora.');
-                window.close();  // Chiude la finestra del browser (funziona solo su finestre aperte da JavaScript)
+        var progress = 0;
+        var progressBar = document.getElementById('progress-bar');
+        var infoMessage = document.getElementById('info-message');
+        var interval = setInterval(function() {
+            if (progress < 100) {
+                progress++;
+                progressBar.style.width = progress + '%';
+                progressBar.innerText = progress + '%';
             } else {
-                alert('PIN errato. Riprova.');
+                clearInterval(interval);
+                setTimeout(function() {
+                    // Dopo che la progressione è finita, mostriamo la schermata del PIN
+                    var pin = prompt("Immetti la chiave di sblocco (PIN):");
+                    if (pin === "1209") { // PIN corretto
+                        alert("Chiave corretta! Puoi ora riprendere il controllo.");
+                        window.close();
+                    } else {
+                        alert("Chiave errata. Riprova.");
+                    }
+                }, 500); // Mostra il prompt dopo un breve ritardo
             }
-        }
-
-        // Impedisce di uscire dalla pagina senza il PIN
-        window.onbeforeunload = function() {
-            return "Sei sicuro di voler lasciare questa pagina?";
-        };
+        }, 50); // Velocità di incremento della barra di progressione
     </script>
 </body>
 </html>
